@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 import pandas as pd
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # -----------------------------------
 #   MODEL DEFINITIONS
@@ -62,7 +63,7 @@ if st.button("Predict"):
 
         # FIX MULTIINDEX (your environment returns MultiIndex ALWAYS)
         if isinstance(data.columns, pd.MultiIndex):
-            data.columns = data.columns.droplevel(0)
+            data.columns = data.columns.get_level_values(0)
 
         if "Close" not in data.columns:
             st.error("Downloaded data missing 'Close' column. Cannot proceed.")
@@ -87,12 +88,12 @@ if st.button("Predict"):
         # ---------------------------------------
         if model_choice == "MLP":
             model = MLPClassifier(input_dim=20)
-            weight_path = "models/saved_weights/mlp_weights.pth"
+            weight_path = Path(__file__).resolve().parents[1] / "models/saved_weights/mlp_weights.pth"
 
         else:  # future LSTM option
             model = LSTMClassifier()
             x = x.reshape(1, 20, 1)
-            weight_path = "models/saved_weights/lstm_weights.pth"
+            weight_path = Path(__file__).resolve().parents[1] / "models/saved_weights/lstm_weights.pth"
 
         try:
             model.load_state_dict(torch.load(weight_path, map_location=torch.device("cpu")))
