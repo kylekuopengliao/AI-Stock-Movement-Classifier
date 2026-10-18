@@ -241,3 +241,14 @@ It provides a real example of integrating trained neural models into a usable ap
 ## Training notebook fixes
 
 The training notebook includes explicit hyperparameters (`WINDOW_SIZE=20`, `BATCH_SIZE=32`, `LR=0.001`, `EPOCHS_MLP=20`, `EPOCHS_LSTM=20`). Training requires internet access to retrieve current market history from Yahoo Finance. Run all notebook cells in order from the project root or `notebooks` directory; weights are saved in `models/saved_weights/`. The model weights are not included until you train locally.
+
+
+## Application Screenshots
+
+Below are screenshots of the AI Stock Movement Classifier's Streamlit interface.
+
+### Application Interface
+![Application Interface](screenshots/screenshot1.png)
+
+### Stock Prediction Results
+![Stock Prediction Results](screenshots/screenshot2.png)
